@@ -1,0 +1,37 @@
+#include <LiquidCrystal.h>
+
+const int buttonPin = 2;  // Push button pin
+const int lcdRS = 12;     // LCD RS pin
+const int lcdE = 11;      // LCD E pin
+const int lcdD4 = 5;      // LCD D4 pin
+const int lcdD5 = 4;      // LCD D5 pin
+const int lcdD6 = 3;      // LCD D6 pin
+const int lcdD7 = 2;      // LCD D7 pin
+
+LiquidCrystal lcd(lcdRS, lcdE, lcdD4, lcdD5, lcdD6, lcdD7);
+
+int counter = 0;           // Initialize counter variable
+bool buttonState = false;  // Button state variable
+unsigned long lastDebounceTime = 0;  // Debounce timer
+
+void setup() {
+  pinMode(buttonPin, INPUT);
+  lcd.begin(16, 2);  // Initialize LCD display
+  lcd.setCursor(0, 0);
+  lcd.print("Counter: ");
+}
+
+void loop() {
+  int reading = digitalRead(buttonPin);
+  if (reading != buttonState) {
+    lastDebounceTime = millis();
+    buttonState = reading;
+  }
+  if (buttonState == HIGH && millis() - lastDebounceTime > 50) {
+    counter++;
+    lcd.setCursor(0, 1);
+    lcd.print(counter);
+    Serial.println(counter);  // Print counter value to serial monitor
+  }
+  delay(10);  // Debounce delay
+}
