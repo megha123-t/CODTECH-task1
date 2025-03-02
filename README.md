@@ -1,7 +1,11 @@
 Name: Megha Bandi
+
 Company: CODTECH SOLUTIONS
+
 ID: CT08WRU
+
 Domain: Embedded System
+
 Duration: 25th February to 25th march 2025
 
 Overview of the Project
